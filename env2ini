@@ -1,0 +1,13 @@
+#!/bin/sh
+
+file=""
+
+for environment in $(env) ; do
+  arr=(${environment/=/ })
+  key=${arr[0]}
+  value=${arr[1]}
+  downcase_key=`echo | awk -v key=$key '{print tolower(key)}'`
+  file="$file\n${downcase_key}=$value}"
+done
+
+echo $file > properties.ini
